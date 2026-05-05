@@ -80,16 +80,20 @@ setInterval(() => Celestial.date(new Date()), 1000);
 
 ## 起動
 
-1. 観測地を変更したい場合は `sky.html` の `LAT` / `LON` を直接編集。
-2. `./serve.py` (または `python3 serve.py`) で配信。`PORT` 環境変数で待受ポート変更可能 (デフォルト 8080)。
+OBS ブラウザソースに渡す URL は以下のいずれか:
+
+- **GitHub Pages (推奨、運用中)**: `https://semnil.github.io/d3-celestial/sky.html`
+  - `obs-sky` ブランチの root を Pages のソースに設定済み。`git push` で数十秒〜数分後に反映
+  - 初回ロード ~1.2MB (data/*.json fetch)、以後は GitHub Pages の `Cache-Control` で 10 分キャッシュ
+- **ローカル配信**: `./serve.py` (または `python3 serve.py`) を起動し `http://localhost:8080/sky.html` を指定。`PORT` 環境変数で待受ポート変更可能 (デフォルト 8080)
+- 観測地を変更したい場合は `sky.html` の `LAT` / `LON` を直接編集してから push / 起動
 
 ## 検証
 
-1. ルートで `./serve.py`
-2. `http://localhost:8080/sky.html` を開いて確認:
+1. `https://semnil.github.io/d3-celestial/sky.html` (またはローカル `./serve.py` で `http://localhost:8080/sky.html`) を開いて確認:
    - ミッドナイトブルー背景 (`#2a2e42`) に星・天の川 (淡め)・惑星 (記号 + 3 文字略称: Mer / Ven / Mar / Jup / Sat / Ura / Nep / Sol / Lun など)・星座線・星座名 (3 文字略称: UMa / Ori / Cas など)・グラティキュール (細線 `#a8b0d4`) が描画されている。星名・DSO・赤道線・黄道線・星座境界は非表示
    - 天球の中心が画面中央から右へ 1/8 (240px) オフセット、全体 1.15 倍拡大 (`#celestial-map` の CSS `transform: translateX ... scale(1.15)`、origin center)
    - 右下に白文字 12px (右揃え、2 行) で 1 行目 `Star map: d3-celestial (BSD)`、2 行目 `github.com/ofrohn/d3-celestial`
    - フォーム・コントロール類は表示されていない
    - 天球は実時間で進行 (1 時間で約 15° 回転)
-3. OBS ブラウザソース 1920×1080 で同 URL を読ませて同等の表示になること
+2. OBS ブラウザソース 1920×1080 で同 URL を読ませて同等の表示になること
