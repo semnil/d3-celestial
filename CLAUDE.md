@@ -5,8 +5,7 @@ OBS ブラウザソース用 1920×1080 星図背景。`git clone https://github
 ## 配置
 
 - `sky.html` をリポジトリルートに新規作成。
-- `serve.py` をリポジトリルートに新規作成 (配信スクリプト)。
-- `.env.example` をリポジトリルートに新規作成。`.env` は `.gitignore` 対象。
+- `serve.py` をリポジトリルートに新規作成 (配信スクリプト、純粋な静的配信 + キャッシュ抑止のみ)。
 - 既存ファイルは `.gitignore` の追記を除き変更しない。
 - スクリプトはルート相対で読み込む:
   - `lib/d3.min.js`
@@ -18,7 +17,7 @@ OBS ブラウザソース用 1920×1080 星図背景。`git clone https://github
 | 項目 | 値 |
 |---|---|
 | ビューポート | 1920×1080、`<body>` 全面、背景 `#2a2e42` (ミッドナイトブルー寄り) |
-| 観測地 | `.env` の `LAT` / `LON` (10進度) を `serve.py` がプレースホルダ `__LAT__` / `__LON__` に置換 |
+| 観測地 | sky.html に `LAT` / `LON` (10進度) をハードコード。デフォルトは東京駅丸の内中央口 (35.681236, 139.767125) |
 | 時刻 | 実時間 (1 秒間隔で `Celestial.date(new Date())` を呼ぶ。1 時間で天球が約 15° 回転) |
 | 右下 | 2 行表示 (右揃え、白文字 12px、line-height 1.4)。1 行目 `Star map: d3-celestial (BSD)`、2 行目 `github.com/ofrohn/d3-celestial` |
 | 投影 | stereographic、デフォルトスケール (上書きなし、ratio=1.0 で canvas は 1920×1920) |
@@ -46,8 +45,8 @@ OBS ブラウザソース用 1920×1080 星図背景。`git clone https://github
 `demo/sky.html` の config を参照しつつ、以下で生成する:
 
 ```js
-const LAT = parseFloat("__LAT__");
-const LON = parseFloat("__LON__");
+const LAT = 35.681236; // 東京駅丸の内中央口
+const LON = 139.767125;
 
 const config = {
   width: 1920,
@@ -81,7 +80,7 @@ setInterval(() => Celestial.date(new Date()), 1000);
 
 ## 起動
 
-1. `cp .env.example .env` し `LAT` / `LON` を編集。
+1. 観測地を変更したい場合は `sky.html` の `LAT` / `LON` を直接編集。
 2. `./serve.py` (または `python3 serve.py`) で配信。`PORT` 環境変数で待受ポート変更可能 (デフォルト 8080)。
 
 ## 検証
