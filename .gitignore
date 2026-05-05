@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
+/.env
+/.claude/
 test.html
 /todo.txt
 /test-raw.html

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>sky</title>
+  <script type="text/javascript" src="lib/d3.min.js"></script>
+  <script type="text/javascript" src="lib/d3.geo.projection.min.js"></script>
+  <script type="text/javascript" src="celestial.min.js"></script>
+  <style>
+    html, body { margin:0; padding:0; background:#2a2e42; overflow:hidden; }
+    #celestial-map { width:1920px; height:1080px; transform: translateX(calc(1920px / 8)) scale(1.15); transform-origin: center center; }
+    #marker { position:fixed; bottom:16px; right:16px; color:#fff; font:bold 12px sans-serif; text-align:right; line-height:1.4; z-index:10; }
+  </style>
+</head>
+<body>
+  <div id="marker">Star map: d3-celestial (BSD)<br>github.com/ofrohn/d3-celestial</div>
+  <div id="celestial-map"></div>
+  <script type="text/javascript">
+    const LAT = parseFloat("__LAT__");
+    const LON = parseFloat("__LON__");
+    const config = {
+      width: 1920,
+      projection: "stereographic",
+      transform: "equatorial",
+      geopos: [LAT, LON],
+      location: true,
+      follow: "zenith",
+      controls: false,
+      advanced: false,
+      formFields: { location: false, date: false, controls: false },
+      background: { fill: "#2a2e42", stroke: "#2a2e42", opacity: 1 },
+      stars: { show: true, limit: 6, colors: true, size: 7, designation: false },
+      constellations: { names: true, namesType: "desig", lines: true, bounds: false, lineStyle: { stroke: "#cccccc", width: 0.8, opacity: 0.6 } },
+      mw: { show: true, style: { fill: "#ffffff", opacity: 0.02 } },
+      planets: { show: true, symbolType: "disk", names: true, namesType: "desig" },
+      dsos: { show: false, names: false },
+      lines: {
+        graticule: { show: true, stroke: "#a8b0d4", width: 0.3 },
+        equatorial: { show: false },
+        ecliptic: { show: false },
+      },
+      horizon: { show: true, stroke: "#2a2e42", fill: "#2a2e42", opacity: 1 },
+      datetime: new Date(),
+    };
+
+    Celestial.display(config);
+
+    setInterval(() => Celestial.date(new Date()), 1000);
+  </script>
+</body>
+</html>
