@@ -7,7 +7,7 @@
   <script type="text/javascript" src="lib/d3.geo.projection.min.js"></script>
   <script type="text/javascript" src="celestial.min.js"></script>
   <style>
-    html, body { margin:0; padding:0; background:#2a2e42; overflow:hidden; }
+    html, body { margin:0; padding:0; background:#1a2a6c; overflow:hidden; }
     #celestial-map { width:1920px; height:1080px; transform: translateX(calc(1920px / 8)) scale(1.15); transform-origin: center center; }
     #marker { position:fixed; bottom:16px; right:16px; color:#fff; font:bold 12px sans-serif; text-align:right; line-height:1.4; z-index:10; }
   </style>
@@ -28,7 +28,7 @@
       controls: false,
       advanced: false,
       formFields: { location: false, date: false, controls: false },
-      background: { fill: "#2a2e42", stroke: "#2a2e42", opacity: 1 },
+      background: { fill: "#1a2a6c", stroke: "#1a2a6c", opacity: 1 },
       stars: { show: true, limit: 6, colors: true, size: 7, designation: false },
       constellations: { names: true, namesType: "desig", lines: true, bounds: false, lineStyle: { stroke: "#cccccc", width: 0.8, opacity: 0.6 } },
       mw: { show: true, style: { fill: "#ffffff", opacity: 0.02 } },
@@ -39,7 +39,7 @@
         equatorial: { show: false },
         ecliptic: { show: false },
       },
-      horizon: { show: true, stroke: "#2a2e42", fill: "#2a2e42", opacity: 1 },
+      horizon: { show: true, stroke: "#1a2a6c", fill: "#1a2a6c", opacity: 1 },
       datetime: new Date(),
     };
 

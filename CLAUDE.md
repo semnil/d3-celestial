@@ -31,7 +31,7 @@ OBS ブラウザソース 1920×1080 を主用途とした星図ページを 2 �
 
 | 項目 | 値 |
 |---|---|
-| ビューポート | 1920×1080、`<body>` 全面、背景 `#2a2e42` (ミッドナイトブルー寄り) |
+| ビューポート | 1920×1080、`<body>` 全面、背景 `#1a2a6c` (ミッドナイトブルー寄り) |
 | 観測地 | `LAT` / `LON` (10進度) を各 html にハードコード。デフォルトは東京駅丸の内中央口 (35.681236, 139.767125)。両ファイル同期して編集 |
 | 投影 | stereographic、デフォルトスケール (上書きなし、ratio=1.0 で canvas は `config.width × config.width`) |
 | 右下マーカー | 2 行表示 (右揃え、白文字 12px、line-height 1.4)。1 行目 `Star map: d3-celestial (BSD)`、2 行目 `github.com/ofrohn/d3-celestial` |
@@ -52,7 +52,7 @@ OBS ブラウザソース 1920×1080 を主用途とした星図ページを 2 �
 共通:
 
 ```css
-html, body { margin:0; padding:0; background:#2a2e42; overflow:hidden; }
+html, body { margin:0; padding:0; background:#1a2a6c; overflow:hidden; }
 #marker { position:fixed; bottom:16px; right:16px; color:#fff; font:bold 12px sans-serif; text-align:right; line-height:1.4; z-index:10; }
 ```
 
@@ -76,7 +76,7 @@ const config = {
   controls: false,
   advanced: false,
   formFields: { location: false, date: false, controls: false },
-  background: { fill: "#2a2e42", stroke: "#2a2e42", opacity: 1 },
+  background: { fill: "#1a2a6c", stroke: "#1a2a6c", opacity: 1 },
   stars: { show: true, limit: 6, colors: true, size: 7, designation: false },
   constellations: { names: true, namesType: "desig", lines: true, bounds: false, lineStyle: { stroke: "#cccccc", width: 0.8, opacity: 0.6 } }, // show は明示しない (true 指定時 names が強制 true 化される celestial の互換挙動を回避)。lineStyle は shallow 上書きされるため stroke/opacity もデフォルト値を再指定
   mw: { show: true, style: { fill: "#ffffff", opacity: 0.02 } },
@@ -87,7 +87,7 @@ const config = {
     equatorial: { show: false },
     ecliptic: { show: false },
   },
-  horizon: { show: true, stroke: "#2a2e42", fill: "#2a2e42", opacity: 1 },
+  horizon: { show: true, stroke: "#1a2a6c", fill: "#1a2a6c", opacity: 1 },
   datetime: new Date(),
 };
 
@@ -111,7 +111,7 @@ OBS ブラウザソースまたはブラウザに渡す URL:
 
 両ファイルを順に開き、以下を確認:
 
-1. **共通**: ミッドナイトブルー背景 (`#2a2e42`) に星・天の川 (淡め)・惑星 (記号 + 3 文字略称: Mer / Ven / Mar / Jup / Sat / Ura / Nep / Sol / Lun など)・星座線・星座名 (3 文字略称: UMa / Ori / Cas など)・グラティキュール (細線 `#a8b0d4`) が描画され、星名・DSO・赤道線・黄道線・星座境界は非表示。右下に白文字 12px の 2 行マーカー。フォーム・コントロール類は非表示。
+1. **共通**: ミッドナイトブルー背景 (`#1a2a6c`) に星・天の川 (淡め)・惑星 (記号 + 3 文字略称: Mer / Ven / Mar / Jup / Sat / Ura / Nep / Sol / Lun など)・星座線・星座名 (3 文字略称: UMa / Ori / Cas など)・グラティキュール (細線 `#a8b0d4`) が描画され、星名・DSO・赤道線・黄道線・星座境界は非表示。右下に白文字 12px の 2 行マーカー。フォーム・コントロール類は非表示。
 2. **`sky.html` 固有**: 天球の中心が画面中央から右へ 1/8 (240px) オフセット、全体 1.15 倍拡大。天球は実時間で進行 (1 時間で約 15° 回転)。
 3. **`sky-full.html` 固有**: 天球の全円 (直径 1080) が画面高さ内に完全収まる。canvas (1080×1080) は 1920 幅ビューポートの水平中央に配置され、左右に 420px ずつのミッドナイトブルー余白。天球は読込時刻で静止 (時間が進んでも回転しない)。
 4. OBS ブラウザソース 1920×1080 で各 URL を読ませて同等の表示になること。
